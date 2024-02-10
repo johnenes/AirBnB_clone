@@ -2,9 +2,9 @@
 """Define the place class"""
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
-    """ Represent a  place  with 
-    
+    """ Represent a  place
     Attributes:
         city_id (str): The city id
         User_id (str) : The User id
@@ -15,7 +15,7 @@ class Place(BaseModel):
         max_guest (init):The maximum number of guest of the place
         pricce_by_night(init): The price by night of the place
         latitude(float): The latitude of the place
-        longitude(float): The longitude of the place 
+        longitude(float): The longitude of the place
         amenity_id (list) : A list of Amenity ids.
     """
 
@@ -30,4 +30,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
-
