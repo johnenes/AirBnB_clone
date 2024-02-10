@@ -37,7 +37,7 @@ class FileStorage:
         o_dict = FileStorage.__objects
         objectdict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
         with open(FileStorage.__file_path,"w") as f:
-            json.dump(objectdict)
+            json.dump(objectdict,f)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects , if it exist"""
