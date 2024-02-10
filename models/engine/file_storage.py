@@ -4,9 +4,8 @@ from models.user import User
 from models.state import State
 from models.city import  City
 from models.place import Place
-from model.review import Review
-from models.amenity import amenity
-
+from models.review import Review
+from models.amenity import Amenity
 
 
 

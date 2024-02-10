@@ -1,8 +1,16 @@
 #!/usr/bin/python3
+"""Defines the HBnB console."""
 import cmd
 import re
 from shlex import split
 from models import storage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 def parse(arg):
      curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -39,6 +47,10 @@ class HBNBCommand(cmd.Cmd):
          "Amenity"
          "Review"
     }
+
+    def emptyline(self):
+        """Do nothing upon receiving an empty line."""
+        pass
 
     def default(self, arg):
         """Default behavior when invalid input is entered throught the cmd module"""
@@ -78,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
          arg1 = parse(arg)
          if len(arg1) == 0:
               print("** class name missing")
-         elif arg1[0] not in HbnbCommand.__classes:
+         elif arg1[0] not in HBNBCommand.__classes:
               print("** class doesn't exist")
          else:
               print(eval(arg1[0])().id)
@@ -93,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
          objdict = storage.all()
          if len(arg1) == 0:
               print("** class name missing **")
-         elif arg1[0] not in HbnbCommand.__classes:
+         elif arg1[0] not in HBNBCommand.__classes:
               print("** class doesn't exist")
          elif len(arg1) == 1:
               print("** instance id missing**")
@@ -113,11 +125,11 @@ class HBNBCommand(cmd.Cmd):
             If no class is specified, display all instaniate objects
         """
         arg1 = parse(arg)
-        if len(arg1) > 0 and arg1[0] not in HbnbCommand.__classes:
+        if len(arg1) > 0 and arg1[0] not in HBNBCommand.__classes:
             print("** class doen't exist **")
         else:
             obj1 = []
-            for obj in storage.all().value():
+            for obj in storage.all().values():
                 if len(arg1) > 0 and arg1[0] == obj1.__class__.__name__:
                     obj1.append(obj.__srtr__())
                 elif len(arg1) == 0:
@@ -133,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
          objdict = storage.all()
          if len(arg1) == 0:
               print("** class name missing **")
-         elif arg1[0] not in HbnbCommand.__classes:
+         elif arg1[0] not in HBNBCommand.__classes:
               print("** class doesn't exist")
          elif len(arg1) == 1:
               print("** instance id missing**")
@@ -161,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
          if len(arg1) == 0:
               print("** class name missing **")
               return False
-         if arg1[0] not in HbnbCommand.__classes:
+         if arg1[0] not in HBNBCommand.__classes:
               print("** class doesn't exist **")
               return False
          if len(arg1) == 1:
