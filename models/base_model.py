@@ -1,56 +1,51 @@
 #!/usr/bin/python3
-
-"""Defines the BaseModel class"""
+"""Defines the BaseModel class."""
 import models
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-        """BaseModel for the AirBnB project"""
-        def __init__(self, *args, **kwargs):
-                """Initalize a new BaseModel
-                
-                Args:
-                    *args (any) Unused
-                    **kwargs (dict)" key/value pairs  of attribute
+    """Represents the BaseModel of the HBnB project."""
 
-                """
-                tform = "%Y-%m-%dT%H:%M:%S.%f"
-                self.id = str(uuid4())
-                self.create_at = datetime.today()
-                self.update_at = datetime.today()
-                if len(kwargs) != 0:
-                        for key, value in kwargs.items():
-                               if key == "create_at" or key == "update_at":
-                                       self.__dict__[key] = datetime.strftime(value,tform)
+    def __init__(self, *args, **kwargs):
+        """Initialize a new BaseModel.
 
-                               else:
-                                       self.__dict__[key] = value
+        Args:
+            *args (any): Unused.
+            **kwargs (dict): Key/value pairs of attributes.
+        """
+        tform = "%Y-%m-%dT%H:%M:%S.%f"
+        self.id = str(uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    self.__dict__[k] = datetime.strptime(v, tform)
                 else:
-                        models.storage.new(self)
+                    self.__dict__[k] = v
+        else:
+            models.storage.new(self)
 
-        def save(self):
-                """Update update_at with the current datetime"""
-                self.update_at = datetime.today()
-                models.storage.save()
-                
-        def to_dict(self):
-                """Return the dictionary of the Basemodel instance
-                        
-                include the kay and value pair __class__ representing
-                the class name of the object
-                """
+    def save(self):
+        """Update updated_at with the current datetime."""
+        self.updated_at = datetime.today()
+        models.storage.save()
 
-                rdict = self.__dict__.copy()
-                rdict["create_at"]= self.create_at.isoformat()
-                rdict["update_at"] = self.update_at.isoformat()
-                rdict["__class__"] = self.__class__.__name__
-                return rdict
-                
+    def to_dict(self):
+        """Return the dictionary of the BaseModel instance.
 
-        def __str__(self):
-                """Return the print/str representation of the BaseModel instance"""
-                clsName = self.__class__.__name__
-                return "[{}]({}){}".format(clsName,self.id, self.__dict__)
+        Includes the key/value pair __class__ representing
+        the class name of the object.
+        """
+        rdict = self.__dict__.copy()
+        rdict["created_at"] = self.created_at.isoformat()
+        rdict["updated_at"] = self.updated_at.isoformat()
+        rdict["__class__"] = self.__class__.__name__
+        return rdict
 
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
