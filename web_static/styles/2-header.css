@@ -2,15 +2,7 @@ header{
 	
 	height:60px;
 	width:100%;
-	color:white;
-	border-bottom:1px solid #CCCCCC;
-	background-image:url(../images/logo.png);
-	background-repeat:no-repeat;
-	background-size:contain;
-	background-position:left;
-	float:left;
-	text-align:left;
-	z-index:4
+	background-color:#FF0000;
 
 	
 }
